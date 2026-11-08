@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/001-create-users.yaml
+  - include:
+      file: db/changelog/002-create-products.yaml
+  - include:
+      file: db/changelog/003-create-carts.yaml
+  - include:
+      file: db/changelog/004-create-orders.yaml
+  - include:
+      file: db/changelog/005-create-outbox.yaml

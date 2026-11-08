@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-users
+      author: shopstream
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: CURRENT_TIMESTAMP
+
+  - changeSet:
+      id: 001-insert-admin
+      author: shopstream
+      changes:
+        # Пароль: admin123 (BCrypt-хэш). Сгенерирован специально для теста.
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: username, value: "admin" }
+              - column: { name: email, value: "admin@shopstream.local" }
+              - column: { name: password, value: "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy" }
+              - column: { name: role, value: "ADMIN" }
